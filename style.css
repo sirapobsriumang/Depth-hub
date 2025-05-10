@@ -1,0 +1,317 @@
+:root {
+    --primary-color: #00c6ff; /* Bright blue */
+    --secondary-color: #0072ff; /* Deeper blue */
+    --accent-color: #00f5d4; /* Teal/Aqua */
+    --background-dark: #0a101f; /* Very dark blue */
+    --background-medium: #10182b; /* Dark blue */
+    --text-color: #e0e0e0;
+    --text-glow: rgba(0, 198, 255, 0.7);
+    --shadow-color: rgba(0, 198, 255, 0.3);
+    --font-primary: 'Orbitron', sans-serif; /* Techy font for titles */
+    --font-secondary: 'Roboto', sans-serif; /* Readable font for body */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-secondary);
+    color: var(--text-color);
+    background-color: var(--background-dark);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll from waves */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* --- Background Animation --- */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.wave {
+    background: linear-gradient(90deg, rgba(0, 198, 255, 0.2), rgba(0, 114, 255, 0.1));
+    border-radius: 1000% 1000% 0 0;
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    animation: wave-animation 15s infinite linear;
+    opacity: 0;
+}
+
+.wave:nth-child(1) {
+    bottom: -190%;
+    left: -50%;
+    animation-duration: 10s;
+    animation-delay: 0s;
+    opacity: 0.6;
+}
+
+.wave:nth-child(2) {
+    bottom: -185%;
+    left: -50%;
+    animation-duration: 12s;
+    animation-delay: -3s;
+    opacity: 0.4;
+}
+
+.wave:nth-child(3) {
+    bottom: -180%;
+    left: -50%;
+    animation-duration: 15s;
+    animation-delay: -5s;
+    opacity: 0.2;
+}
+
+@keyframes wave-animation {
+    0% { transform: translateX(0) rotate(0deg); }
+    50% { transform: translateX(-25%) rotate(10deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+}
+
+
+/* --- Main Container & Layout --- */
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    position: relative; /* For stacking context */
+    z-index: 1;
+    animation: fadeInContainer 1s ease-out forwards;
+}
+
+@keyframes fadeInContainer {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Header --- */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: slideDown 0.8s 0.2s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.header h1 {
+    font-family: var(--font-primary);
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.title-glow {
+    text-shadow: 0 0 8px var(--text-glow), 0 0 12px var(--text-glow), 0 0 20px var(--text-glow);
+}
+
+.header p {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.subtitle-glow {
+     text-shadow: 0 0 5px rgba(0, 245, 212, 0.6), 0 0 8px rgba(0, 245, 212, 0.4);
+}
+
+/* --- Content Box --- */
+.content-box {
+    background: rgba(16, 24, 43, 0.85); /* Semi-transparent dark background */
+    border: 1px solid rgba(0, 198, 255, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--shadow-color) inset;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari */
+    animation: popIn 0.7s 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.script-info {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.script-info h2 {
+    font-family: var(--font-primary);
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+/* --- Script Display --- */
+.script-container {
+    background: rgba(10, 16, 31, 0.9); /* Darker, almost opaque */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    border: 1px solid rgba(0, 114, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 114, 255, 0.2) inset;
+}
+
+.script-container pre {
+    white-space: pre-wrap; /* Wrap long lines */
+    word-wrap: break-word; /* Break words if necessary */
+    color: #c8d6e5; /* Light grey for script text */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    margin-bottom: 15px; /* Space for the button */
+}
+
+.script-container code {
+    display: block; /* Ensure it takes full width */
+}
+
+.copy-button {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    box-shadow: 0 4px 15px rgba(0, 150, 255, 0.3);
+}
+
+.copy-button:hover {
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 150, 255, 0.5);
+}
+
+.copy-button:active {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 2px 10px rgba(0, 150, 255, 0.2);
+}
+
+.copy-button svg {
+    transition: transform 0.3s ease;
+}
+
+.copy-button.copied svg {
+    transform: scale(1.2) rotate(10deg);
+}
+.copy-button.copied span {
+    animation: pulseText 0.5s ease-out;
+}
+
+@keyframes pulseText {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* --- Instructions --- */
+.instructions {
+    background: rgba(10, 16, 31, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.instructions h3 {
+    font-family: var(--font-primary);
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.instructions ol {
+    list-style-position: inside;
+    padding-left: 5px;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+/* --- Footer --- */
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 20px;
+    font-size: 0.9rem;
+    color: rgba(224, 224, 224, 0.6);
+    animation: fadeInUp 0.8s 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2.5rem;
+    }
+    .header p {
+        font-size: 1rem;
+    }
+    .content-box {
+        padding: 20px;
+    }
+    .script-container pre {
+        font-size: 0.85rem;
+    }
+    .copy-button {
+        position: static; /* Stack below code on small screens */
+        width: 100%;
+        margin-top: 15px;
+    }
+    .script-container {
+         padding-bottom: 20px; /* Adjust padding for static button */
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    .instructions h3 {
+        font-size: 1.2rem;
+    }
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 10px;
+    }
+}
